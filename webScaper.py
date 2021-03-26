@@ -69,7 +69,7 @@ if numLinks > 0:
 
             content = driver.page_source
 
-            soup = BeautifulSoup(content)
+            soup = BeautifulSoup(content, 'html.parser')
 
             for i in range(0, numAttr):
                 for elem in soup.findAll(attrs=str(linkFile[2 + i])):
@@ -77,15 +77,16 @@ if numLinks > 0:
                     if name not in results and name is not None:
                         # We only want non None results
                             results.append(name)
-                
-            # Clean up results (Gets rid of attribute)
-            cleanResults = '\n'.join(str(results[0]).split('\n')[1:-1])
 
-            # Write to file
-            file1 = open("./data/data" + str(i) + ".txt", "w")
-            for elem in cleanResults:
-                file1.writelines(elem)
-            file1.close()
+            if len(results) > 0:    
+                # Clean up results (Gets rid of attribute)
+                cleanResults = '\n'.join(str(results[0]).split('\n')[1:-1])
+
+                # Write to file
+                file1 = open("./data/data" + str(i) + ".txt", "w")
+                for elem in cleanResults:
+                    file1.writelines(elem)
+                file1.close()
     except IndexError:
        print("IndexError, the number of links specified did not match the number of links provided.") 
 else:
