@@ -6,7 +6,7 @@ from pathlib import Path
 import os
 
 # Check that directory for data is created
-Path("/data").mkdir(parents=True, exist_ok=True)
+Path("./data").mkdir(parents=True, exist_ok=True)
 
 try:
     print("MAKING DIRECTORY")
@@ -64,23 +64,27 @@ if numLinks > 0:
             # Now read in elements
             driver.get(link)
 
+            # Store the results here
             results = []
 
             content = driver.page_source
 
             soup = BeautifulSoup(content)
 
-
             for i in range(0, numAttr):
                 for elem in soup.findAll(attrs=str(linkFile[2 + i])):
                     name = elem.find(str(linkFile[2 + numAttr + i]))
-                    if name not in results:
-                        results.append(name)
+                    if name not in results and name is not None:
+                        # We only want non None results
+                            results.append(name)
+                
+            # Clean up results (Gets rid of attribute)
+            cleanResults = '\n'.join(str(results[0]).split('\n')[1:-1])
 
             # Write to file
-            file1 = open("/data/data" + str(i) + ".txt", "w")
-            for elem in results:
-                file1.writelines(str(elem))
+            file1 = open("./data/data" + str(i) + ".txt", "w")
+            for elem in cleanResults:
+                file1.writelines(elem)
             file1.close()
     except IndexError:
        print("IndexError, the number of links specified did not match the number of links provided.") 
