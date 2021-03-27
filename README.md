@@ -11,4 +11,4 @@ Follow the instructions for the configuration file.
 
 For links to scrape, first run with link0.txt and observe the new data directory.
 
-After this emulate the information in the example link text file.
+To add new links, emulate the information in the example link text file.
