@@ -9,7 +9,6 @@ import os
 Path("./data").mkdir(parents=True, exist_ok=True)
 
 try:
-    print("MAKING DIRECTORY")
     os.makedirs("/data")
 except FileExistsError:
     # Directory is already created
