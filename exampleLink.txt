@@ -1,0 +1,4 @@
+# Here is where you put in  link
+# here is where you specify the number of attrivutes you would like to scrape
+# now list each attribute
+# now list each element to find from that attribute
