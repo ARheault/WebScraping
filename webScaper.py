@@ -28,13 +28,13 @@ except:
             '# driver location ex: C:/Users/alexd/Projects/WebScraping/chromedriver.exe\n', \
             '# number of links\n', \
             'place driver location here\n', \
-            'place links here, new line for each link' \
+            'place number of links here' \
         ]
     configuration.writelines(default)
     configuration.close()
     sys.exit()
 
-config = configuration.read().splitlines()[4:]
+config = configuration.read().splitlines()[3:]
 
 # Check if client has setup config.
 driverPath = str(config[0])
@@ -87,6 +87,9 @@ if numLinks > 0:
                 for elem in cleanResults:
                     file1.writelines(elem)
                 file1.close()
+            else:
+                # No data is scraped
+                print("No data scraped, check config file for errors")
     except IndexError:
        print("IndexError, the number of links specified did not match the number of links provided.") 
 else:
