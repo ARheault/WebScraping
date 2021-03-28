@@ -26,7 +26,6 @@ need to find the version of chrome you're using by navigating to settings/help i
 version number. Now you'll need to navigate to https://chromedriver.chromium.org/downloads and download the correct
 webdriver for your version of google chrome.
 
-5 is subject to change if I decide to just make it an exe
 5. After the setup is complete you can run the program at any time by typing the same command 'python main.py'
 The program will scrape any images in the imageData directory, and pdfs in the pdfData directory, and any websites
 in the links file.
