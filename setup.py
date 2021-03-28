@@ -100,7 +100,6 @@ try:
              "version number. Now you'll need to navigate to https://chromedriver.chromium.org/downloads and download the correct\n",
              "webdriver for your version of google chrome.\n",
              "\n",
-             "5 is subject to change if I decide to just make it an exe\n,"
              "5. After the setup is complete you can run the program at any time by typing the same command 'python main.py'\n",
              "The program will scrape any images in the imageData directory, and pdfs in the pdfData directory, and any websites\n",
              "in the links file."]
