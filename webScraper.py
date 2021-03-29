@@ -23,6 +23,13 @@ in the config file and use that to decide which to check.
 # First link the driver
 driver = webdriver.Chrome(executable_path=driverPath)
 
+'''
+options = webdriver.ChromeOptions()
+options.add_argument('--ignore-certificate-errors')
+options.add_argument('--ignore-ssl-errors')
+driver = webdriver.Chrome(chrome_options=options)
+'''
+
 # Now read link file
 try:
     linkFile = open("./data/webData/links.txt", 'r')
@@ -60,16 +67,20 @@ try:
 
         # Clean up link for storage name
         cleanLink = linkCleaner.clean(link)
-
         # Write it to a data file in the data dump
         try:
             fileSoup = open('./dataDump/' + cleanLink + '.txt', 'w')
             fileSoup.write(text)
         except FileNotFoundError:
             print("FileNotFoundError: File not found, data dump directory corrupted or deleted.")
+            driver.quit()
         except:
             print("Generic Error")
+            driver.quit()
 except TimeoutError:
     print("Timeout")
+    driver.quit()
 except:
     print("generic error")
+    driver.quit()
+driver.quit()
