@@ -47,7 +47,3 @@ else:
             sys.exit()
         else:
             subprocess.run("python webScraper.py " + driverPath)
-
-
-
-

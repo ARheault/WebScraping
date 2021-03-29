@@ -2,7 +2,7 @@ import pandas as pd
 from bs4 import BeautifulSoup
 from selenium import webdriver
 import sys
-import linkClean
+from helpers import cleaner
 
 # Make sure we're being passed the driver
 if len(sys.argv) < 2:
@@ -36,6 +36,10 @@ links = linkFile.read().splitlines()[:]
 if links[0] == "# For this file you will list the links of the pages you'd like to scrape" and links[1] == "# make sure to delete these lines":
     print("Check link file in ./data/webData/links.txt and follow the instructions.")
 
+# Instantiate helpers
+linkCleaner = cleaner.linkClean(0)
+textCleaner = cleaner.textClean(0)
+
 try:
     # For each link
     for link in links:
@@ -51,8 +55,11 @@ try:
         # get relevant text
         text = soup.get_text()
 
+        # Clean and format file
+        text = textCleaner.clean(text)
+
         # Clean up link for storage name
-        cleanLink = linkClean.clean(link)
+        cleanLink = linkCleaner.clean(link)
 
         # Write it to a data file in the data dump
         try:
@@ -65,4 +72,4 @@ try:
 except TimeoutError:
     print("Timeout")
 except:
-    print("generic error, will set exceptions as progression furthers.")
+    print("generic error")
