@@ -9,14 +9,7 @@ class linkClean(cleaner):
 
     def clean(self, link):
         clean = link
-        '''
-        clean = clean.replace(":", " ")
-        clean = clean.replace("//", " ")
-        clean = clean.replace("/", " ")
-        clean = clean.replace(".", " ")
-        clean = clean.replace(":", " ")
-        toClean = clean.split(' ')
-       ''' 
+        # first replace all delimiters with spaces and break it into a list
         toClean = clean.replace(":", " ").replace("//", " ").replace("/", " ").replace(".", " ").replace(":", " ").split(' ')
 
         cleanList = []
@@ -27,13 +20,19 @@ class linkClean(cleaner):
             'com': 0,
             'net': 0,
             'org': 0
-            # not the best way, but for now it is easy and we can easily make changes to how to clean here..
+            # Can add new values that you'd like to remove from here.
+            # Add a comma to the value before and format is
+            # 'thingToIgnore': 0
         }
+        # If it's not in the specified works to remove add it to the clean list
         for elem in toClean:
             if elem in myDict:
                 continue
             else:
                 cleanList.append(elem)
+        # Change list into string
+        # Using join had a None value for some reason at the start, so for now this
+        # but I'd like to 
         clean = ''
         for i in range(0, len(cleanList)):
             if cleanList[i] != '' and i + 1 < len(cleanList):
@@ -48,4 +47,9 @@ class textClean(cleaner):
         self.setting = setting
     
     def clean(self, text):
-        return text
+        toClean = text.split('\n')
+        clean = ''
+        for elem in toClean:
+            if elem is not None and elem != '':
+                clean += elem + '\n'
+        return clean
