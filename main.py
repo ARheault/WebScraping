@@ -7,11 +7,18 @@ import subprocess
 import sys
 from pathlib import Path
 import os
+import platform
+
+# Find out which OS
+whichOS = platform.system()
 
 # Check if the config file exists.
 if not os.path.exists('config.txt'):
     print("Running initial setup please refer to config.txt for information.")
-    subprocess.run("python setup.py") 
+    if whichOS == 'Windows':
+        subprocess.run("python setup.py") 
+    else:
+        subprocess.run("python3 setup.py") 
 
 # If the config does exist.
 else:
@@ -33,11 +40,17 @@ else:
 
     if config[0][-1] == '1':
         # Use image scraper
-        subprocess.run("python imageScraper.py")
+        if whichOS == 'Windows':
+            subprocess.run("python imageScraper.py")
+        else:
+            subprocess.run("python3 imageScraper.py")
     
     if config[1][-1] == '1':
         # use pdf  scraper
-        subprocess.run("python pdfScraper.py")
+        if whichOS == 'Windows':
+            subprocess.run("python pdfScraper.py")
+        else:
+            subprocess.run("python3 pdfScraper.py")
     
     if config[2][-1] == '1':
         # Check if client has setup config.
@@ -46,4 +59,7 @@ else:
             print("Please set driver location value in config.txt")
             sys.exit()
         else:
-            subprocess.run("python webScraper.py " + driverPath)
+            if whichOS == 'Windows':
+                    subprocess.run("python webScraper.py " + driverPath)
+            else:
+                    subprocess.run("python3 webScraper.py " + driverPath)
