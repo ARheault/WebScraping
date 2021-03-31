@@ -2,7 +2,6 @@
 This is the main execution thread of the project. It will check the config file run the
 subroutines accordingly.
 '''
-
 import subprocess
 import sys
 from pathlib import Path
@@ -11,6 +10,9 @@ import platform
 
 # Find out which OS
 whichOS = platform.system()
+# macOS = Darwin
+# Windows = Windows
+# Linux = Linux
 
 # Check if the config file exists.
 if not os.path.exists('config.txt'):
